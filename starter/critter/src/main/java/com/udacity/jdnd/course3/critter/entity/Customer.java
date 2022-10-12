@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Nationalized
@@ -16,7 +16,7 @@ public class Customer {
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(targetEntity = Pet.class, mappedBy = "customer")
     private List<Pet> pets;
 
     public Long getId() {

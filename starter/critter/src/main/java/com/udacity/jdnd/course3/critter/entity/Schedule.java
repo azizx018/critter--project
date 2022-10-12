@@ -11,13 +11,14 @@ import java.util.Set;
 @Entity
 public class Schedule {
     @Id
-    @GeneratedValue
+    @Column(name = "schedule_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
+    @ManyToMany(targetEntity = Employee.class)
     private List<Employee> employees;
 
-    @ManyToMany
+    @ManyToMany(targetEntity = Pet.class)
     private List<Pet> pets;
 
     private LocalDate date;
