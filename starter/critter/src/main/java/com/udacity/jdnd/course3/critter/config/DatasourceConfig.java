@@ -11,13 +11,13 @@ public class DatasourceConfig {
     @Bean
     public DataSource getDatasource() {
         DataSourceBuilder dsb = DataSourceBuilder.create();
-        dsb.username("admin");
+        dsb.username("root");
         dsb.password(securePasswordService());
-        dsb.url("jdbc:mysql://localhost:3306/critterdb");
+        dsb.url("jdbc:mysql://localhost:3306/critterdb?serverTimezone=UTC");
         return dsb.build();
     }
 
     private String securePasswordService() {
-        return "pass963";
+        return "C0conut$y0!!";
     }
 }
