@@ -19,6 +19,12 @@ public class Customer {
     @OneToMany(targetEntity = Pet.class, mappedBy = "customer")
     private List<Pet> pets;
 
+
+    //this was added to add pets to the customer pet list
+    public void insertPet(Pet pet) {
+        pets.add(pet);
+    }
+
     public Long getId() {
         return id;
     }
