@@ -68,6 +68,11 @@ public class UserController {
         }
         return customerDTO;
     }
+    private Customer convertCustomerDTOToCustomer(CustomerDTO customerDTO) {
+        Customer customer = new Customer();
+        copyProperties(customerDTO, customer);
+        return customer;
+    }
 
 
 }
