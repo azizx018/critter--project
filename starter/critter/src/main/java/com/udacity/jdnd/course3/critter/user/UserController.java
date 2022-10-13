@@ -4,10 +4,12 @@ import com.udacity.jdnd.course3.critter.entity.Customer;
 import com.udacity.jdnd.course3.critter.entity.Employee;
 import com.udacity.jdnd.course3.critter.entity.Pet;
 import com.udacity.jdnd.course3.critter.service.CustomerService;
+import com.udacity.jdnd.course3.critter.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,11 +26,25 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private PetService petService;
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-        throw new UnsupportedOperationException();
+        List<Long> petIds = customerDTO.getPetIds();
+        List<Pet> pets = new ArrayList<>();
+        if(petIds != null) {
+            for(Long petId: petIds) {
+                pets.add(petService.getPetById(petId));
+            }
+        }
+        Customer customer = convertCustomerDTOToCustomer(customerDTO);
+        customer.setPets(pets);
+        Customer savedCustomer = customerService.saveCustomer(customer);
+        return convertCustomerToCustomerDTO(savedCustomer);
     }
 
     @GetMapping("/customer")
