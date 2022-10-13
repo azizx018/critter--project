@@ -1,6 +1,7 @@
 package com.udacity.jdnd.course3.critter.user;
 
 import com.udacity.jdnd.course3.critter.entity.Customer;
+import com.udacity.jdnd.course3.critter.entity.Employee;
 import com.udacity.jdnd.course3.critter.entity.Pet;
 import com.udacity.jdnd.course3.critter.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,12 @@ public class UserController {
         copyProperties(customerDTO, customer);
         return customer;
     }
+
+//    private EmployeeDTO convertEmployeeToEmployeeDTO(Employee pet) {
+//        EmployeeDTO employeeDTO = new EmployeeDTO();
+//        copyProperties(pet, employeeDTO);
+//        return employeeDTO;
+//    }
 
 
 }
