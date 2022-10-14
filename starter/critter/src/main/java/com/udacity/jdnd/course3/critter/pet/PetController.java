@@ -20,6 +20,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 public class PetController {
     @Autowired
     private CustomerService customerService;
+    @Autowired
     private PetService petService;
 
     @PostMapping
@@ -51,7 +52,7 @@ public class PetController {
         return petService.findAllPets().stream().map(this::convertPetToPetDTO).collect(Collectors.toList());
     }
 
-    @GetMapping("/owner/{ownerId}")
+    @GetMapping("/owner/{customerId}")
     public List<PetDTO> getPetsByOwner(@PathVariable long customerId) {
         return petService.getPetsByOwner(customerId).stream().map(this::convertPetToPetDTO).collect(Collectors.toList());
     }
