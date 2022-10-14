@@ -26,6 +26,19 @@ public class Schedule {
     @Column(name = "Activities", length = 500)
     private Set<EmployeeSkill> activities;
 
+    public Schedule(long id, Set<EmployeeSkill>activities, LocalDate date,
+                    List<Employee>employees, List<Pet> pets){
+        this.id = id;
+        this.activities = activities;
+        this.date = date;
+        this.employees = employees;
+        this.pets = pets;
+    }
+
+    public Schedule() {
+
+    }
+
     public Long getId() {
         return id;
     }
