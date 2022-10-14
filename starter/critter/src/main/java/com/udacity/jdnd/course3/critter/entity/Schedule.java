@@ -23,6 +23,7 @@ public class Schedule {
     private LocalDate date;
 
     @ElementCollection
+    @Column(name = "Activities", length = 500)
     private Set<EmployeeSkill> activities;
 
     public Long getId() {
