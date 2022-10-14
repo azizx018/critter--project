@@ -49,7 +49,7 @@ public class UserController {
 
     @GetMapping("/customer")
     public List<CustomerDTO> getAllCustomers(){
-        throw new UnsupportedOperationException();
+        return customerService.findAllCustomers().stream().map(this::convertCustomerToCustomerDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/customer/pet/{petId}")
