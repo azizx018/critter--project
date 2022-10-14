@@ -4,6 +4,7 @@ import com.udacity.jdnd.course3.critter.entity.Customer;
 import com.udacity.jdnd.course3.critter.entity.Employee;
 import com.udacity.jdnd.course3.critter.entity.Pet;
 import com.udacity.jdnd.course3.critter.service.CustomerService;
+import com.udacity.jdnd.course3.critter.service.EmployeeService;
 import com.udacity.jdnd.course3.critter.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,8 @@ public class UserController {
 
     @Autowired
     private PetService petService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
@@ -63,7 +66,9 @@ public class UserController {
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        Employee employee = convertEmployeeDTOToEmployee(employeeDTO);
+        Employee savedEmployee = employeeService.saveEmployee(employee);
+        return convertEmployeeToEmployeeDTO(savedEmployee);
     }
 
     @PostMapping("/employee/{employeeId}")
@@ -95,11 +100,17 @@ public class UserController {
         return customer;
     }
 
-//    private EmployeeDTO convertEmployeeToEmployeeDTO(Employee pet) {
-//        EmployeeDTO employeeDTO = new EmployeeDTO();
-//        copyProperties(pet, employeeDTO);
-//        return employeeDTO;
-//    }
+    private EmployeeDTO convertEmployeeToEmployeeDTO(Employee pet) {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        copyProperties(pet, employeeDTO);
+        return employeeDTO;
+    }
+    private Employee convertEmployeeDTOToEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        copyProperties(employeeDTO, employee);
+        return employee;
+
+    }
 
 
 }
