@@ -32,9 +32,10 @@ public class CustomerService {
         return allCustomers;
     }
 
-    public Customer getOwnerByPet(Long petId) {
-        Customer selectedCustomer = petRepository.findById(petId).get().getCustomer();
-        return selectedCustomer;
+    public Customer getOwnerByPetId(Long petId) {
+        return petRepository.getOne(petId).getCustomer();
+//        Customer selectedCustomer = petRepository.findById(petId).get().getCustomer();
+//        return selectedCustomer;
 
     }
     public Customer saveCustomer(Customer customer) {
