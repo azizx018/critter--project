@@ -22,11 +22,6 @@ public class CustomerService {
     PetRepository petRepository;
 
 
-//    public CustomerService(CustomerRepository customerRepository, PetRepository petRepository) {
-//        this.customerRepository = customerRepository;
-//        this.petRepository = petRepository;
-//    }
-
     public List<Customer> findAllCustomers() {
         List<Customer> allCustomers = customerRepository.findAll();
         return allCustomers;
