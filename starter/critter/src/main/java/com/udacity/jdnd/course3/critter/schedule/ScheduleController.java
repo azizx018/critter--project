@@ -1,11 +1,13 @@
 package com.udacity.jdnd.course3.critter.schedule;
 
+import com.udacity.jdnd.course3.critter.entity.Customer;
 import com.udacity.jdnd.course3.critter.entity.Employee;
 import com.udacity.jdnd.course3.critter.entity.Pet;
 import com.udacity.jdnd.course3.critter.entity.Schedule;
 import com.udacity.jdnd.course3.critter.service.EmployeeService;
 import com.udacity.jdnd.course3.critter.service.PetService;
 import com.udacity.jdnd.course3.critter.service.ScheduleService;
+import com.udacity.jdnd.course3.critter.user.CustomerDTO;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -76,8 +78,21 @@ public class ScheduleController {
     private ScheduleDTO convertScheduleToScheduleDTO(Schedule schedule) {
         ScheduleDTO scheduleDTO = new ScheduleDTO();
         copyProperties(schedule, scheduleDTO);
+        if(schedule.getPets() != null) {
+            scheduleDTO.setPetIds(schedule.getPets().stream().map(Pet::getId).collect(Collectors.toList()));
+        }
+        if(schedule.getEmployees() != null) {
+            scheduleDTO.setEmployeeIds(schedule.getEmployees().stream().map(Employee::getId).collect(Collectors.toList()));
+        }
         return scheduleDTO;
     }
+
+
+//    private ScheduleDTO convertScheduleToScheduleDTO(Schedule schedule) {
+//        ScheduleDTO scheduleDTO = new ScheduleDTO();
+//        copyProperties(schedule, scheduleDTO);
+//        return scheduleDTO;
+//    }
     private Schedule convertScheduleDTOtoSchedule(ScheduleDTO scheduleDTO) {
         Schedule schedule = new Schedule();
         copyProperties(scheduleDTO, schedule);
