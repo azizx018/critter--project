@@ -1,5 +1,6 @@
 package com.udacity.jdnd.course3.critter.repositories;
 
+import com.udacity.jdnd.course3.critter.entity.Customer;
 import com.udacity.jdnd.course3.critter.entity.Employee;
 import com.udacity.jdnd.course3.critter.entity.Pet;
 import com.udacity.jdnd.course3.critter.entity.Schedule;
@@ -15,6 +16,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     List<Schedule> getDetailsByEmployees(Employee employee);
 
+    List<Schedule> getDetailsByCustomer(Customer customer);
 
     List<Schedule> getDetailsByPets(Pet pet);
 
