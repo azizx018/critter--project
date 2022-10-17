@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +36,7 @@ public class EmployeeService {
         List<Employee> allEmployeesAvailable = employeeRepository.findAllByDaysAvailable(dayOfWeek);
         List<Employee> filteredBySkillEmployees = new ArrayList<>();
         for (Employee employee:allEmployeesAvailable) {
-            if (employee.getSkills().containsAll(skills)){
+            if (employee.getActivities().containsAll(skills)){
                 filteredBySkillEmployees.add(employee);
             }
         }

@@ -27,8 +27,7 @@ public class CustomerService {
 
     public Customer getOwnerByPetId(Long petId) {
         return petRepository.getOne(petId).getCustomer();
-//        Customer selectedCustomer = petRepository.findById(petId).get().getCustomer();
-//        return selectedCustomer;
+
 
     }
     public Customer saveCustomer(Customer customer) {
