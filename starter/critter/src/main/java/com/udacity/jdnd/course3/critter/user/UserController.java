@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -66,8 +67,17 @@ public class UserController {
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        Set<EmployeeSkill> skills = employeeDTO.getSkills();
+        Set<EmployeeSkill> activities = new HashSet<>();
+
+        if(skills != null) {
+            activities = new HashSet<EmployeeSkill>(employeeDTO.getSkills());
+        }
         Employee employee = convertEmployeeDTOToEmployee(employeeDTO);
+        employee.setSkills(activities);
+
         Employee savedEmployee = employeeService.saveEmployee(employee);
+
         return convertEmployeeToEmployeeDTO(savedEmployee);
     }
 
@@ -108,12 +118,27 @@ public class UserController {
 
     private EmployeeDTO convertEmployeeToEmployeeDTO(Employee pet) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
+        Set<EmployeeSkill> activities;
+
+        if(pet.getActivities() != null) {
+            activities = new HashSet<EmployeeSkill>(pet.getActivities());
+        } else {
+            activities = new HashSet<EmployeeSkill>();
+        }
+        employeeDTO.setSkills(activities);
         copyProperties(pet, employeeDTO);
         return employeeDTO;
     }
     private Employee convertEmployeeDTOToEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
+        Set<EmployeeSkill> skills;
+        if(employeeDTO.getSkills() != null) {
+            skills = new HashSet<EmployeeSkill>(employeeDTO.getSkills());
+        } else {
+            skills = new HashSet<EmployeeSkill>();
+        }
         copyProperties(employeeDTO, employee);
+        employee.setSkills(skills);
         return employee;
 
     }
