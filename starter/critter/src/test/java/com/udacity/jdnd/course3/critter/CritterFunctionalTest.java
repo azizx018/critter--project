@@ -46,7 +46,6 @@ public class CritterFunctionalTest {
     private ScheduleController scheduleController;
 
     @Test
-    @Order(1)
     public void testCreateCustomer(){
         CustomerDTO customerDTO = createCustomerDTO();
         CustomerDTO newCustomer = userController.saveCustomer(customerDTO);
