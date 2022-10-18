@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 @Transactional
 public class ScheduleService {
     @Autowired
-    CustomerRepository customerRepository;
-    @Autowired
     PetRepository petRepository;
     @Autowired
     EmployeeRepository employeeRepository;
@@ -45,7 +43,6 @@ public class ScheduleService {
 
     public List<Schedule> getScheduleForCustomer(Long customerId) {
         List<Pet> customerPets = petRepository.findAllPetsByCustomer_Id(customerId);
-        //List <Long> petIds = customerPets.stream().map(Pet::getId).collect(Collectors.toList());
         List<Schedule> schedules= scheduleRepository.findAllByPetsIn(customerPets);
         return schedules.stream().map(this::saveSchedule).collect(Collectors.toList());
     }

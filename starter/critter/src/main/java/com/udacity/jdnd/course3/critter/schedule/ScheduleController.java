@@ -39,9 +39,11 @@ public class ScheduleController {
         List<Long> employeeIds = scheduleDTO.getEmployeeIds();
         List<Long> petIds = scheduleDTO.getPetIds();
         Set<EmployeeSkill> activities = scheduleDTO.getActivities();
+
         List<Pet> pets = new ArrayList<>();
         List<Employee> employees = new ArrayList<>();
         Set<EmployeeSkill> skills = new HashSet<>();
+
         if(petIds != null){
             for(Long petId: petIds){
                 pets.add(petService.getPetById(petId));
@@ -58,7 +60,7 @@ public class ScheduleController {
 
         Schedule schedule = convertScheduleDTOtoSchedule(scheduleDTO);
         schedule.setPets(pets);
-        schedule.setActivities(activities);
+        schedule.setActivities(skills);
         schedule.setEmployees(employees);
         Schedule savedSchedule = scheduleService.saveSchedule(schedule);
         return convertScheduleToScheduleDTO(savedSchedule);
@@ -91,7 +93,6 @@ public class ScheduleController {
         ScheduleDTO scheduleDTO = new ScheduleDTO();
         Set<EmployeeSkill> activities;
 
-        //copyProperties(schedule, scheduleDTO);
         if(schedule.getPets() != null) {
             scheduleDTO.setPetIds(schedule.getPets().stream().map(Pet::getId).collect(Collectors.toList()));
         }
