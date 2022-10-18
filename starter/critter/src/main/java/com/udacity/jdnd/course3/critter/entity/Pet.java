@@ -1,6 +1,4 @@
 package com.udacity.jdnd.course3.critter.entity;
-
-import com.udacity.jdnd.course3.critter.entity.Customer;
 import com.udacity.jdnd.course3.critter.pet.PetType;
 
 import javax.persistence.*;
@@ -9,6 +7,7 @@ import java.time.LocalDate;
 @Entity
 public class Pet {
     @Id
+    //identity keeps sep table from being added in mysql
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
