@@ -16,8 +16,12 @@ import java.util.Set;
 @Service
 @Transactional
 public class EmployeeService {
-    @Autowired
-    EmployeeRepository employeeRepository;
+
+   private EmployeeRepository employeeRepository;
+
+   public EmployeeService(EmployeeRepository employeeRepository) {
+       this.employeeRepository = employeeRepository;
+   }
 
 
     public Employee saveEmployee(Employee employee) {

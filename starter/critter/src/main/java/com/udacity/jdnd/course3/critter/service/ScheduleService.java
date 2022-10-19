@@ -18,12 +18,18 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class ScheduleService {
-    @Autowired
-    PetRepository petRepository;
-    @Autowired
-    EmployeeRepository employeeRepository;
-    @Autowired
-    ScheduleRepository scheduleRepository;
+
+   private PetRepository petRepository;
+
+    private EmployeeRepository employeeRepository;
+
+    private ScheduleRepository scheduleRepository;
+    public ScheduleService(PetRepository petRepository, EmployeeRepository employeeRepository,
+                           ScheduleRepository scheduleRepository) {
+        this.petRepository = petRepository;
+        this.scheduleRepository = scheduleRepository;
+        this.employeeRepository = employeeRepository;
+    }
 
 
     public List<Schedule> getAllSchedules() {
