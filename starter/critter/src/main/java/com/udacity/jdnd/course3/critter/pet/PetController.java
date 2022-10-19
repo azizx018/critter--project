@@ -25,10 +25,9 @@ public class PetController {
 
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
-        Customer customer = null;
-        if ((Long) petDTO.getOwnerId() != null){
-            customer = customerService.getCustomerById(petDTO.getOwnerId());
-        }
+        Customer customer;
+        customer = customerService.getCustomerById(petDTO.getOwnerId());
+
         Pet pet = convertPetDTOtoPet(petDTO);
         pet.setCustomer(customer);
         Pet savedPet = petService.savePet(pet);
