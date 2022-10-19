@@ -11,7 +11,7 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private PetType petType;
+    private PetType type;
 
     private String name;
 
@@ -32,12 +32,12 @@ public class Pet {
         this.id = id;
     }
 
-    public PetType getPetType() {
-        return petType;
+    public PetType getType() {
+        return type;
     }
 
-    public void setPetType(PetType petType) {
-        this.petType = petType;
+    public void setType(PetType type) {
+        this.type = type;
     }
 
     public String getName() {
