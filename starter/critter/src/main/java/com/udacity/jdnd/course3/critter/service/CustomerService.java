@@ -14,10 +14,15 @@ import java.util.Optional;
 @Transactional
 public class CustomerService {
 
-    @Autowired
-    CustomerRepository customerRepository;
-    @Autowired
-    PetRepository petRepository;
+
+    private CustomerRepository customerRepository;
+
+    private PetRepository petRepository;
+
+    public CustomerService(CustomerRepository customerRepository, PetRepository petRepository) {
+        this.customerRepository = customerRepository;
+        this.petRepository = petRepository;
+    }
 
 
     public List<Customer> findAllCustomers() {
