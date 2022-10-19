@@ -104,6 +104,7 @@ public class ScheduleController {
         } else {
             activities = new HashSet<EmployeeSkill>();
         }
+        scheduleDTO.setId(schedule.getId());
         scheduleDTO.setActivities(activities);
         scheduleDTO.setDate(schedule.getDate());
         return scheduleDTO;
